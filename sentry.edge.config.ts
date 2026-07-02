@@ -4,7 +4,8 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from "@sentry/nextjs";
-
+{
+  /*Sentry.init({}
 Sentry.init({
   dsn: "https://99739cca404042b38df3a20ecf4396a9@o4511667366002688.ingest.de.sentry.io/4511667375898705",
 
@@ -21,3 +22,5 @@ Sentry.init({
     // httpBodies: [],
   },
 });
+*/
+}
