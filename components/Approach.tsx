@@ -4,6 +4,11 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 const Approach = () => {
   return (

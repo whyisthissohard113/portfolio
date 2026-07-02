@@ -2,6 +2,11 @@
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 export const TextGenerateEffect = ({
   words,

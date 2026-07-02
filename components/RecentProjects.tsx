@@ -4,6 +4,11 @@ import { FaLocationArrow } from "react-icons/fa6";
 
 import { projects } from "@/data";
 import { PinContainer } from "./ui/Pin";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 const RecentProjects = () => {
   return (

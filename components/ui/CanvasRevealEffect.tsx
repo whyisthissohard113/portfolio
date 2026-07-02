@@ -3,6 +3,11 @@ import { cn } from "@/lib/utils";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
@@ -230,7 +235,7 @@ const ShaderMaterial = ({
         case "uniform3fv":
           preparedUniforms[uniformName] = {
             value: uniform.value.map((v: number[]) =>
-              new THREE.Vector3().fromArray(v)
+              new THREE.Vector3().fromArray(v),
             ),
             type: "3fv",
           };
