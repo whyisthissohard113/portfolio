@@ -8,11 +8,6 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 export const FloatingNav = ({
   navItems,
@@ -76,7 +71,7 @@ export const FloatingNav = ({
           border: "1px solid rgba(255, 255, 255, 0.125)",
         }}
       >
-        {navItems.map((navItem: any, idx: number) => (
+        {navItems.map((navItem, idx: number) => (
           <Link
             key={`link=${idx}`}
             href={navItem.link}

@@ -2,11 +2,6 @@
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 export const TextGenerateEffect = ({
   words,
@@ -18,7 +13,6 @@ export const TextGenerateEffect = ({
   const [scope, animate] = useAnimate();
   let wordsArray = words.split(" ");
   useEffect(() => {
-    console.log(wordsArray);
     animate(
       "span",
       {

@@ -4,11 +4,6 @@ import React from "react";
 
 import { companies, testimonials } from "@/data";
 import { InfiniteMovingCards } from "./ui/InfiniteCards";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 const Clients = () => {
   return (

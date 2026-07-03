@@ -2,11 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 export const InfiniteMovingCards = ({
   items,
@@ -28,10 +23,18 @@ export const InfiniteMovingCards = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
+  const [start, setStart] = useState(false);
+
   useEffect(() => {
     addAnimation();
   }, []);
-  const [start, setStart] = useState(false);
+
+  useEffect(() => {
+    if (containerRef.current && start) {
+      getDirection();
+      getSpeed();
+    }
+  }, [direction, speed]);
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);

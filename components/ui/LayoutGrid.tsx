@@ -4,11 +4,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "./MovingBorders";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 type Card = {
   id: number;

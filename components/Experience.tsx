@@ -2,11 +2,6 @@ import React from "react";
 
 import { workExperience } from "@/data";
 import { Button } from "./ui/MovingBorders";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 const Experience = () => {
   return (
@@ -20,7 +15,7 @@ const Experience = () => {
           <Button
             key={card.id}
             //   random duration will be fun , I think , may be not
-            duration={Math.floor(Math.random() * 10000) + 10000}
+            duration={Math.floor((card.id * 8371 + 10000) % 20000) + 10000}
             borderRadius="1.75rem"
             style={{
               //   add these two

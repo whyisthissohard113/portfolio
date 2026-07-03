@@ -9,11 +9,6 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 export function Button({
   borderRadius = "1.75rem",
@@ -37,7 +32,6 @@ export function Button({
   return (
     <Component
       className={cn(
-        // remove h-16 w-40, add  md:col-span-2
         "bg-transparent relative text-xl p-[1px] overflow-hidden md:col-span-2 md:row-span-1",
         containerClassName,
       )}

@@ -3,11 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 type Direction = "TOP" | "LEFT" | "BOTTOM" | "RIGHT";
 

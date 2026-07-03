@@ -4,11 +4,6 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { CanvasRevealEffect } from "./ui/CanvasRevealEffect";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 const Approach = () => {
   return (
@@ -192,7 +187,7 @@ const AceternityIcon = ({ order }: { order: string }) => {
   );
 };
 
-export const Icon = ({ className, ...rest }: any) => {
+export const Icon = ({ className, ...rest }: { className?: string; [key: string]: any }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

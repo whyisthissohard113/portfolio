@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 
@@ -70,7 +71,7 @@ export const BentoGridItem = ({
   };
 
   const handleCopy = () => {
-    const text = "hsu@jsmastery.pro";
+    const text = "damian.it247@gmail.com";
     navigator.clipboard.writeText(text);
     setCopied(true);
   };
@@ -185,17 +186,22 @@ export const BentoGridItem = ({
                 }`}
               >
                 {/* <img src="/confetti.gif" alt="confetti" /> */}
-                <Lottie options={defaultOptions} height={200} width={400} />
-              </div>
+               <Lottie
+  animationData={animationData}
+  loop={copied}
+  autoplay={copied}
+  style={{ height: 200, width: 400 }}
+/>
 
               <MagicButton
                 title={copied ? "Email is Copied!" : "Copy my email address"}
                 icon={<IoCopyOutline />}
                 position="left"
                 handleClick={handleCopy}
-                otherClasses="!bg-[#161A31]"
+              otherClasses="!bg-[#161A31]"
               />
             </div>
+          </div>
           )}
         </div>
       </div>

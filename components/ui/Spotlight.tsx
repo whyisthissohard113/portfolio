@@ -1,10 +1,5 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 type SpotlightProps = {
   className?: string;

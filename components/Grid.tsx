@@ -1,10 +1,5 @@
 import { gridItems } from "@/data";
 import { BentoGrid, BentoGridItem } from "./ui/BentoGrid";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
 
 const Grid = () => {
   return (

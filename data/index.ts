@@ -105,7 +105,7 @@ export const projects = [
   {
     id: 5,
     title: "Gaming Concept Website - Redefine ",
-    des: "Recreated the PNA Stationary website in Wordpress, combining GSAP animations and Three.js 3D effects..",
+    des: "A cutting-edge gaming concept website built to showcase immersive UI/UX, featuring dynamic 3D elements and smooth GSAP animations.",
     img: "/p8.svg",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
     link: "https://redefine.webtera.co.za/",

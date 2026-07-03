@@ -10,12 +10,6 @@ declare module "@react-three/fiber" {
     threeGlobe: Object3DNode<ThreeGlobe, typeof ThreeGlobe>;
   }
 }
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-});
-
 extend({ ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
@@ -101,60 +95,10 @@ export function Globe({ globeConfig, data }: WorldProps) {
       _buildData();
       _buildMaterial();
     }
-  }, [globeRef.current]);
-
-  const _buildMaterial = () => {
-    if (!globeRef.current) return;
-
-    const globeMaterial = globeRef.current.globeMaterial() as unknown as {
-      color: Color;
-      emissive: Color;
-      emissiveIntensity: number;
-      shininess: number;
-    };
-    globeMaterial.color = new Color(globeConfig.globeColor);
-    globeMaterial.emissive = new Color(globeConfig.emissive);
-    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
-    globeMaterial.shininess = globeConfig.shininess || 0.9;
-  };
-
-  const _buildData = () => {
-    const arcs = data;
-    let points = [];
-    for (let i = 0; i < arcs.length; i++) {
-      const arc = arcs[i];
-      const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
-      points.push({
-        size: defaultProps.pointSize,
-        order: arc.order,
-        color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
-        lat: arc.startLat,
-        lng: arc.startLng,
-      });
-      points.push({
-        size: defaultProps.pointSize,
-        order: arc.order,
-        color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
-        lat: arc.endLat,
-        lng: arc.endLng,
-      });
-    }
-
-    // remove duplicates for same lat and lng
-    const filteredPoints = points.filter(
-      (v, i, a) =>
-        a.findIndex((v2) =>
-          ["lat", "lng"].every(
-            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"],
-          ),
-        ) === i,
-    );
-
-    setGlobeData(filteredPoints);
-  };
+  }, []);
 
   useEffect(() => {
-    if (globeRef.current && globeData) {
+    if (globeData && globeRef.current) {
       globeRef.current
         .hexPolygonsData(countries.features)
         .hexPolygonResolution(3)
@@ -226,7 +170,57 @@ export function Globe({ globeConfig, data }: WorldProps) {
     return () => {
       clearInterval(interval);
     };
-  }, [globeRef.current, globeData]);
+  }, [globeData]);
+
+  const _buildMaterial = () => {
+    if (!globeRef.current) return;
+
+    const globeMaterial = globeRef.current.globeMaterial() as unknown as {
+      color: Color;
+      emissive: Color;
+      emissiveIntensity: number;
+      shininess: number;
+    };
+    globeMaterial.color = new Color(globeConfig.globeColor);
+    globeMaterial.emissive = new Color(globeConfig.emissive);
+    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
+    globeMaterial.shininess = globeConfig.shininess || 0.9;
+  };
+
+  const _buildData = () => {
+    const arcs = data;
+    let points = [];
+    for (let i = 0; i < arcs.length; i++) {
+      const arc = arcs[i];
+      const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
+      points.push({
+        size: defaultProps.pointSize,
+        order: arc.order,
+        color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
+        lat: arc.startLat,
+        lng: arc.startLng,
+      });
+      points.push({
+        size: defaultProps.pointSize,
+        order: arc.order,
+        color: (t: number) => `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`,
+        lat: arc.endLat,
+        lng: arc.endLng,
+      });
+    }
+
+    // remove duplicates for same lat and lng
+    const filteredPoints = points.filter(
+      (v, i, a) =>
+        a.findIndex((v2) =>
+          ["lat", "lng"].every(
+            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"],
+          ),
+        ) === i,
+    );
+
+    setGlobeData(filteredPoints);
+  };
 
   return (
     <>
@@ -284,12 +278,12 @@ export function World(props: WorldProps) {
 }
 
 export function hexToRgb(hex: string) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   });
 
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
         r: parseInt(result[1], 16),
