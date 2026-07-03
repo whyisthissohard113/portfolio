@@ -50,11 +50,18 @@ export function HoverBorderGradient({
   useEffect(() => {
     if (!hovered) {
       const interval = setInterval(() => {
-        setDirection((prevState) => rotateDirection(prevState));
+        setDirection((prevState) => {
+          const directions: Direction[] = ["TOP", "LEFT", "BOTTOM", "RIGHT"];
+          const currentIndex = directions.indexOf(prevState);
+          const nextIndex = clockwise
+            ? (currentIndex - 1 + directions.length) % directions.length
+            : (currentIndex + 1) % directions.length;
+          return directions[nextIndex];
+        });
       }, duration * 1000);
       return () => clearInterval(interval);
     }
-  }, [hovered]);
+  }, [hovered, duration, clockwise]);
   return (
     <Tag
       onMouseEnter={(event: React.MouseEvent<HTMLDivElement>) => {
