@@ -94,16 +94,26 @@ export const BentoGridItem = ({
     >
       {/* add img divs */}
       <div className={`${id === 6 && "flex justify-center"} h-full`}>
-        <div className="w-full h-full absolute">
-          {img && (
-            <Image
-              src={img}
-              alt={img}
-              fill
-              className={cn(imgClassName, "object-cover object-center ")}
-            />
-          )}
-        </div>
+        {img && id === 5 ? (
+          <Image
+            src={img}
+            alt={img}
+            width={384}
+            height={384}
+            className={imgClassName}
+          />
+        ) : (
+          <div className="w-full h-full absolute">
+            {img && (
+              <Image
+                src={img}
+                alt={img}
+                fill
+                className={cn(imgClassName, "object-cover object-center ")}
+              />
+            )}
+          </div>
+        )}
         <div
           className={`absolute right-0 -bottom-5 ${
             id === 5 && "w-full opacity-80"
@@ -177,7 +187,7 @@ export const BentoGridItem = ({
             </div>
           )}
           {id === 6 && (
-            <div className="mt-5 relative">
+            <div className="mt-5 relative pt-8">
               {/* button border magic from tailwind css buttons  */}
               {/* add rounded-md h-8 md:h-8, remove rounded-full */}
               {/* remove focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 */}
@@ -188,22 +198,22 @@ export const BentoGridItem = ({
                 }`}
               >
                 {/* <img src="/confetti.gif" alt="confetti" /> */}
-               <Lottie
-  animationData={animationData}
-  loop={copied}
-  autoplay={copied}
-  style={{ height: 200, width: 400 }}
-/>
+                <Lottie
+                  animationData={animationData}
+                  loop={copied}
+                  autoplay={copied}
+                  style={{ height: 200, width: 400 }}
+                />
 
-              <MagicButton
-                title={copied ? "Email is Copied!" : "Copy my email address"}
-                icon={<IoCopyOutline />}
-                position="left"
-                handleClick={handleCopy}
-              otherClasses="!bg-[#161A31]"
-              />
+                <MagicButton
+                  title={copied ? "Email is Copied!" : "Copy my email address"}
+                  icon={<IoCopyOutline />}
+                  position="left"
+                  handleClick={handleCopy}
+                  otherClasses="!bg-[#161A31]"
+                />
+              </div>
             </div>
-          </div>
           )}
         </div>
       </div>
